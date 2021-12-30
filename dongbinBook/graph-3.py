@@ -33,12 +33,10 @@ while q:
         if referenceCount[i] == 0:
             q.append(i)
 
-def getTimes(i):
-    
-
-
-for i in sortedList:
-    for 
+# for i in sortedList:
+    # for 
+# 실패했음
+# 정렬후 재귀로 해결하려 했으나... 그럼 정렬하는 의미가 없음... 그냥 dfs 로 모든 시간을 구해버리는 것..
 
 
 
@@ -60,8 +58,8 @@ for i in range(1, v + 1):
         indegree[i] += 1
         graph[x].append(i)
     
-def topology_sort(): # 정렬을 이용하지만 정렬된 결과를 사용하지 않는...!
-    result = copy.deepcopy(time) # 총 걸리는 시간을 저장하기 위해 딥카피 수행
+def topology_sort(): # 정렬을 이용하지만 정렬된 결과를 사용하지 않는...! 정렬을 하면서 결과 값을 계산함
+    result = copy.deepcopy(time) # 총 걸리는 시간을 저장하기 위해 딥카피 수행 (메모이제이션)
     q = deque()
 
     for i in range(1, v + 1):
@@ -72,7 +70,8 @@ def topology_sort(): # 정렬을 이용하지만 정렬된 결과를 사용하�
         now = q.popleft()
 
         for i in graph[now]:
-            result[i] = max(result[i], result[now] + time[i]) # now가 선수과목이기 때문에 시간을 추가하는 곳은 now가 아니다...!
+            result[i] = max(result[i], result[now] + time[i]) # now가 선수과목이기 때문에 시간을 추가하는 곳은 now가 아니다...! 
+            # 이렇게 할 수 있는 이유: 정렬을 수행했기 때문에 이후의 연산에 영향을 받지 않기 때문!!
             indegree[i] -= 1
             if indegree[i] == 0:
                 q.append(i)
